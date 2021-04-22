@@ -9,6 +9,14 @@ const docs = [doc1, doc2, doc3, doc4];
 
 const searchEngine = buildSearchEngine(docs);
 
+test('Returns null for empty string', () => {
+  expect(searchEngine.search('')).toBeNull();
+});
+
+test('Returns null for no results', () => {
+  expect(searchEngine.search('not feeling lucky')).toBeNull();
+});
+
 test('Finds a word', () => {
   expect(searchEngine.search('shoot')).toEqual(['doc2', 'doc1']);
 });
