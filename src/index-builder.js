@@ -7,7 +7,7 @@ const calcTf = (termToRank, terms) => {
 };
 
 export default (docs) => {
-  const withTF = docs.reduce((acc, doc) => {
+  const indexByTF = docs.reduce((acc, doc) => {
     const { id, text } = doc;
     const terms = match(text);
     terms.forEach((term) => {
@@ -22,11 +22,11 @@ export default (docs) => {
     return acc;
   }, {});
 
-  const withTFIDF = _.mapValues(withTF, (data) => {
-    const relevantDocsCount = Object.keys(data).length;
+  const indexByTFIDF = _.mapValues(indexByTF, (TFRankingByDoc) => {
+    const relevantDocsCount = Object.keys(TFRankingByDoc).length;
     const IDF = Math.log10(docs.length / relevantDocsCount);
-    return _.mapValues(data, (TF) => TF * IDF);
+    return _.mapValues(TFRankingByDoc, (TF) => TF * IDF);
   });
 
-  return withTFIDF;
+  return indexByTFIDF;
 };

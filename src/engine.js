@@ -10,7 +10,8 @@ const search = (index, token) => {
 
   const terms = Object.keys(index);
   const termsToSearch = match(token);
-  if (_.intersection(terms, termsToSearch).length === 0) {
+  const hasTermsToSearch = !_.isEmpty(_.intersection(terms, termsToSearch));
+  if (!hasTermsToSearch) {
     return null;
   }
 
