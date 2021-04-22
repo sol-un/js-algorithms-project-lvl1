@@ -4,6 +4,8 @@ import match from './utils.js';
 import buildIndex from './index-builder.js';
 
 const search = (index, token) => {
+  // eslint-disable-next-line
+  console.log(index, token);
   if (token.length === 0) {
     return null;
   }
